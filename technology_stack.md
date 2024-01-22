@@ -43,3 +43,13 @@ https://www.imsglobal.org/spec/lti/v1p3 - Learning Tools Interoperability
 # Codegrade
 
 https://www.codegrade.com/
+
+# Nbgrader extensions
+
+https://github.com/LibreTexts/ngshare - nbgrader sharing service
+
+# Jupyter extensions
+
+https://github.com/jupyterhub/hubshare - A directory sharing service for JupyterHub
+https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/174 - nbgrader support in JupyterHub on Kubernetes
+
