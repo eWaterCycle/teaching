@@ -24,6 +24,7 @@ https://okpy.org/
 CoCalc is a virtual online workspace for calculations, research, collaboration and authoring documents. Your web browser is all you need to escape the confined space of your desktop and move to the cloud. This guide explains the features of CoCalc in depth and shows how you can use them productively.
 
 https://cocalc.com/
+https://github.com/sagemathinc/cocalc
 
 # e2x
 
