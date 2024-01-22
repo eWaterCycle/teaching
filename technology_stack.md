@@ -4,8 +4,8 @@ Below is a list of possible stuff for teaching:
 
 # Books & instances
 
-https://jupyter4edu.github.io/jupyter-edu-book/
-https://www.surf.nl/en/services/jupyter-for-education
+* https://jupyter4edu.github.io/jupyter-edu-book/
+* https://www.surf.nl/en/services/jupyter-for-education
 
 # nbgrader 
 
@@ -27,8 +27,8 @@ https://cocalc.com/
 
 # e2x
 
-https://github.com/DigiKlausur/e2xhub - A JupyterHub extension for simplifying course management for teaching and exams
-https://github.com/DigiKlausur/e2xgrader - e2xgrader is an add-on for nbgrader that adds functionality for teachers and students. e2xgrader introduces new cell types and tools for graders (per question grading view, authoring component, pen-based grading) and students (assignment toolbar, exam toolbar, restricted notebook extension).
+* https://github.com/DigiKlausur/e2xhub - A JupyterHub extension for simplifying course management for teaching and exams
+* https://github.com/DigiKlausur/e2xgrader - e2xgrader is an add-on for nbgrader that adds functionality for teachers and students. e2xgrader introduces new cell types and tools for graders (per question grading view, authoring component, pen-based grading) and students (assignment toolbar, exam toolbar, restricted notebook extension).
 
 # illumidesk
 
@@ -36,9 +36,9 @@ https://github.com/IllumiDesk/illumidesk
 
 # Brightspace
 
-https://docs.valence.desire2learn.com/reference.html - API docs
-https://github.com/Brightspace/valence-sdk-python - Python Client
-https://www.imsglobal.org/spec/lti/v1p3 - Learning Tools Interoperability
+* https://docs.valence.desire2learn.com/reference.html - API docs
+* https://github.com/Brightspace/valence-sdk-python - Python Client
+* https://www.imsglobal.org/spec/lti/v1p3 - Learning Tools Interoperability
 
 # Codegrade
 
@@ -50,6 +50,6 @@ https://github.com/LibreTexts/ngshare - nbgrader sharing service
 
 # Jupyter extensions
 
-https://github.com/jupyterhub/hubshare - A directory sharing service for JupyterHub
-https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/174 - nbgrader support in JupyterHub on Kubernetes
+* https://github.com/jupyterhub/hubshare - A directory sharing service for JupyterHub
+* https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/174 - nbgrader support in JupyterHub on Kubernetes
 
