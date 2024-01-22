@@ -33,7 +33,7 @@ https://github.com/jupyter/nbgrader/tree/main/demos/demo_multiple_classes
 
 ```
 docker build -t nbgraderhub .
-docker run -p 8000:8000 -p 9999:9999 nbgraderhub
+docker run -p 8000:8000 nbgraderhub
 ```
 
 Goto http://localhost:8000
