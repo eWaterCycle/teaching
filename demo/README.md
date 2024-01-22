@@ -44,7 +44,9 @@ Login with
 
 # TODO
 
-* JupyterHub
-* Multiple users
-* Multiple courses
+* [x] JupyterHub
+* [x] Multiple users
+* [x] Multiple courses
 * R
+* oauth or user sync
+* 
