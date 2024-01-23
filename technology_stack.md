@@ -55,9 +55,13 @@ https://github.com/IllumiDesk/illumidesk
 
 https://www.codegrade.com/
 
-## 
+Looks good (nice lms integration), however seems to be more focussed on students running code on their own machines. The testing environment is apparently fully configurable, but there doesn't seem to be a clear way to have users work in a notebook that is hosted remotely.
+
+## Vocareum
 
 https://www.vocareum.com/
+
+Already available at TU Delft, but apparently not enough compute available https://www.tudelft.nl/teaching-support/educational-tools/vocareum
 
 # Nbgrader extensions
 
