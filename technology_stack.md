@@ -11,6 +11,14 @@ Below is a list of possible stuff for teaching:
 
 https://nbgrader.readthedocs.io/
 
+nbgrader with R:
+- https://github.com/ttimbers/jupyter-nbgrader-r
+- https://doc.cocalc.com/howto/nbgrader.html#nbgrader-for-r
+
+# otter-grader
+
+https:/otter-grader.readthedocs.io/
+
 # OK
 
 Server: Hosted Web Application to store submissions
