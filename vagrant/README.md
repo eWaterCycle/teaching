@@ -7,6 +7,7 @@ Try to run
 - run containerized ewatercycle models
 - inside vagrant with hyper-v
 - micro8ks as kubernetes deployment
+- mount dcache
 
 ## Boot
 
@@ -19,20 +20,20 @@ https://jet.dev/blog/spin-up-local-kubernetes-cluster-agrant/
 ```
 vagrant ssh microk8s_a
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.19.226.152
+172.19.224.255
 vagrant ssh microk8s_b
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.19.234.158
+172.19.224.136
 
 #a
 sudo -i
-echo "172.19.234.158 microk8s-b" >> /etc/hosts
+echo "172.19.224.136 microk8s-b" >> /etc/hosts
 exit
 
 microk8s add-node
 
 #b
-microk8s join 172.19.226.152:25000/13a97d6ef692d3eadb078866e78f2acd/6da73c5b9623
+microk8s join 172.19.224.255:25000/ca5b88a8fce3cd45bff6aa8eb435d140/699b0df3a535
 
 #a
 microk8s kubectl get nodes
@@ -41,13 +42,14 @@ microk8s enable metallb
 # Use range inside hyperv default switch
 172.19.231.83-172.19.231.93
 microk8s enable hostpath-storage
+ microk8s enable rbac # As advised at https://z2jh.jupyter.org/en/stable/administrator/security.html#use-role-based-access-control-rbac
 ```
 # NFS
 
 https://microk8s.io/docs/how-to-nfs
 
 ```
-sudo apt-get install nfs-kernel-server
+sudo apt-get install -y nfs-kernel-server
 sudo mkdir -p /srv/nfs
 sudo chown nobody:nogroup /srv/nfs
 sudo chmod 0777 /srv/nfs
@@ -74,7 +76,7 @@ metadata:
   name: nfs-csi
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 172.19.226.152
+  server: 172.19.224.255
   share: /srv/nfs
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -198,3 +200,6 @@ microk8s helm install ngshare ngshare/ngshare  --namespace teach -f  config.ngsh
 - run model in container
   - singleuser container can run apptainer/podman inside
   - https://www.redhat.com/sysadmin/podman-inside-kubernetes
+- mount dcache
+  https://github.com/wunderio/csi-rclone
+  https://github.com/simplyzee/kube-rclone

@@ -9,9 +9,6 @@
 # Available chart versions: https://hub.jupyter.org/helm-chart/
 #
 hub:
-#  containerSecurityContext:
-#    privigleged: true
-#    runAsUser: 1000  # default user id in jupyter images
   config:
     Authenticator:
       admin_user:
@@ -28,6 +25,11 @@ hub:
         - eWaterCycle
       scope:
         - read:org
+    # TODO fix below, as is jupyterhub gives error when starting server
+    # KubeSpawner:
+    #   container_security_context:
+    #     privileged: true # TODO less privileged
+    #     runAsUser: 1000
   extraConfig:
     ngshare.py: |
       c.JupyterHub.services.append({
@@ -41,7 +43,8 @@ singleuser:
     # https://hub.docker.com/r/jupyter/datascience-notebook/tags/
     # Inspect the Dockerfile at:
     # https://github.com/jupyter/docker-stacks/tree/HEAD/datascience-notebook/Dockerfile
-    name: jupyter/datascience-notebook
+    # name: jupyter/datascience-notebook
+    name: ghcr.io/ewatercycle/teaching
     tag: latest
   storage:
     extraVolumes:
