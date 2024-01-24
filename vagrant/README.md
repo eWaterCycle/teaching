@@ -136,7 +136,7 @@ proxy-public   LoadBalancer   10.152.183.208   172.19.231.83   80:30233/TCP   2m
 
 Login on http://172.19.231.83 with any username:password
 
-# Update config.yaml
+# Upgrade config.yaml
 
 
 ```
@@ -193,10 +193,13 @@ pvc:
 microk8s helm install ngshare ngshare/ngshare  --namespace teach -f  config.ngshare.yaml
 ```
 
+
 # TODO
 
 - ewatercycle image
-- nbgrader
+- nbgrader with ngshare
+- for ngshare-course-management cli create web gui, like a jupyterlab extension, as cli might be too complex for teachers
+- instead of ngshare use nfs volume thats read/write for all users. Is less secure but easier to use.
 - run model in container
   - singleuser container can run apptainer/podman inside
   - https://www.redhat.com/sysadmin/podman-inside-kubernetes
