@@ -30,7 +30,7 @@ Cons:
 
 ## Kubernetes
 
-Use (Zero to JupyterHub with Kubernetes)[z2jh.jupyter.org] to JupyterHub on Kubernetes. The web application is a separate deployment.
+Use [Zero to JupyterHub with Kubernetes](https://z2jh.jupyter.org) to JupyterHub on Kubernetes. The web application is a separate deployment.
 
 Pros:
 - k8s does most babysitting

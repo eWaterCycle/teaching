@@ -27,12 +27,6 @@ Autograding: Secure grading of student code.
 
 https://okpy.org/
 
-# cocalc
-
-CoCalc is a virtual online workspace for calculations, research, collaboration and authoring documents. Your web browser is all you need to escape the confined space of your desktop and move to the cloud. This guide explains the features of CoCalc in depth and shows how you can use them productively.
-
-https://cocalc.com/
-
 # e2x
 
 * https://github.com/DigiKlausur/e2xhub - A JupyterHub extension for simplifying course management for teaching and exams
@@ -62,6 +56,14 @@ Looks good (nice lms integration), however seems to be more focussed on students
 https://www.vocareum.com/
 
 Already available at TU Delft, but apparently not enough compute available https://www.tudelft.nl/teaching-support/educational-tools/vocareum
+
+# cocalc
+
+CoCalc is a virtual online workspace for calculations, research, collaboration and authoring documents. Your web browser is all you need to escape the confined space of your desktop and move to the cloud. This guide explains the features of CoCalc in depth and shows how you can use them productively.
+
+https://cocalc.com/
+
+Their code is open source, but does not have clear setup instructions. Best to [pay them](https://cocalc.com/pricing/onprem) for running it ourselves.
 
 # Nbgrader extensions
 
