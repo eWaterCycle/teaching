@@ -20,27 +20,26 @@ https://jet.dev/blog/spin-up-local-kubernetes-cluster-agrant/
 ```
 vagrant ssh microk8s_a
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.19.224.255
+172.26.149.178
 vagrant ssh microk8s_b
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.19.224.136
+172.26.146.78
 
 #a
 sudo -i
-echo "172.19.224.136 microk8s-b" >> /etc/hosts
+echo "172.26.146.78 microk8s-b" >> /etc/hosts
 exit
 
 microk8s add-node
 
 #b
-microk8s join 172.19.224.255:25000/ca5b88a8fce3cd45bff6aa8eb435d140/699b0df3a535
+microk8s join 172.26.149.178:25000/ca5b88a8fce3cd45bff6aa8eb435d140/699b0df3a535
 
 #a
 microk8s kubectl get nodes
 
-microk8s enable metallb
 # Use range inside hyperv default switch
-172.19.231.83-172.19.231.93
+microk8s enable metallb:172.26.145.83-172.26.145.93
 microk8s enable hostpath-storage
  microk8s enable rbac # As advised at https://z2jh.jupyter.org/en/stable/administrator/security.html#use-role-based-access-control-rbac
 ```
@@ -49,12 +48,14 @@ microk8s enable hostpath-storage
 https://microk8s.io/docs/how-to-nfs
 
 ```
+# on a
+sudo apt update
 sudo apt-get install -y nfs-kernel-server
 sudo mkdir -p /srv/nfs
 sudo chown nobody:nogroup /srv/nfs
 sudo chmod 0777 /srv/nfs
 sudo mv /etc/exports /etc/exports.bak
-echo '/srv/nfs 172.19.0.0/16(rw,sync,no_subtree_check)' | sudo tee /etc/exports
+echo '/srv/nfs 172.0.0.0/8(rw,sync,no_subtree_check)' | sudo tee /etc/exports
 sudo systemctl restart nfs-kernel-server
 microk8s enable helm3
 microk8s helm3 repo add csi-driver-nfs https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
@@ -76,7 +77,7 @@ metadata:
   name: nfs-csi
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 172.19.224.255
+  server: 172.26.149.178
   share: /srv/nfs
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -193,6 +194,58 @@ pvc:
 microk8s helm install ngshare ngshare/ngshare  --namespace teach -f  config.ngshare.yaml
 ```
 
+## Container in container
+
+```
+# fuse-device-plugin.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+ name: fuse-device-plugin-daemonset
+ namespace: kube-system
+spec:
+ selector:
+   matchLabels:
+     name: fuse-device-plugin-ds
+ template:
+   metadata:
+     labels:
+       name: fuse-device-plugin-ds
+   spec:
+     hostNetwork: true
+     containers:
+     - image: soolaugust/fuse-device-plugin:v1.0
+       name: fuse-device-plugin-ctr
+       securityContext:
+         allowPrivilegeEscalation: false
+         capabilities:
+           drop: ["ALL"]
+       volumeMounts:
+         - name: device-plugin
+           mountPath: /var/lib/kubelet/device-plugins
+     volumes:
+       - name: device-plugin
+         hostPath:
+           path: /var/lib/kubelet/device-plugins
+     imagePullSecrets:
+       - name: registry-secret
+```
+
+```
+microk8s kubectl apply -f - < fuse-device-plugin.yaml
+```
+
+```
+apptainer run docker://alpine:latest cat /etc/os-release
+apptainer run docker://ghcr.io/ewatercycle/leakybucket-grpc4bmi:v0.0.1
+```
+
+```python
+from grpc4bmi.bmi_client_apptainer import BmiClientApptainer
+model = BmiClientApptainer('docker://ghcr.io/ewatercycle/leakybucket-grpc4bmi:v0.0.1', work_dir='/tmp')
+model.get_component_name()
+del model
+```
 
 # TODO
 
