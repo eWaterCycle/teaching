@@ -23,6 +23,7 @@ Pros:
 - HPC cluster already has apptainer and Slurm
 - When not used the VM is only thing running
 - like [RS-DAT](https://github.com/RS-DAT)
+
 Cons:
 - need help/permission from SURF to configure project on HPC cluster
     - student/teacher needs to be mapped to a HPC user
@@ -33,6 +34,7 @@ Use (Zero to JupyterHub with Kubernetes)[z2jh.jupyter.org] to JupyterHub on Kube
 
 Pros:
 - k8s does most babysitting
+
 Cons:
 - need a k8s cluster
 - Need to run apptainer in kubernetes pod
