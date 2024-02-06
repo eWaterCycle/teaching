@@ -13,6 +13,20 @@
 - All users should not be on the same single machine
 - Host web application where you can select a model, a region, and a time period and run model or generate a notebook
 
+## VMs on SRC
+
+We run Virtual Machines (VMs) on the Surf Research Cloud.
+Each VM runs JupyterHub and the web application.
+
+Pros:
+- Looks a lot like <https://github.com/eWaterCycle/infra>
+
+Cons:
+- Students need to be divided over multiple VMs
+- Students can interfere with each other. For example one student could use all cpu, memory or disk space.
+- nbgrader needs exchange directory which will need to be shared between VMs.
+- SRC Cluster can not be resized automaticly, will need to be done manually somehow.
+
 ## Frontend VM & Slurm on hpc
 
 We run a Virtual Machine (VM) on the Surf Research Cloud.
