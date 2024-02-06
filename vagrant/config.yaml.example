@@ -16,9 +16,9 @@ hub:
       allowed_users:
         - sverhoeven
     GitHubOAuthenticator:
-      client_id: <replace me>
-      client_secret: <replace me>
-      oauth_callback_url: http://<replace me>/hub/oauth_callback
+      client_id: ....
+      client_secret: ....
+      oauth_callback_url: http://172.31.180.200/hub/oauth_callback
     JupyterHub:
       authenticator_class: github
       allowed_organizations:
@@ -26,10 +26,30 @@ hub:
       scope:
         - read:org
     # TODO fix below, as is jupyterhub gives error when starting server
-    # KubeSpawner:
-    #   container_security_context:
-    #     privileged: true # TODO less privileged
-    #     runAsUser: 1000
+    # do `Rootless Podman with the privileged flag set` chapter at
+    # https://www.redhat.com/sysadmin/podman-inside-kubernetes
+    KubeSpawner:
+      privileged: true
+      allow_privilege_escalation: true
+      container_security_context:
+        privileged: true # TODO less privileged
+        runAsUser: 1000
+
+      # Got ERROR  : Failed to set mount propagation: Permission denied with:
+      # securityContext:
+      #  allowPrivilegeEscalation: true
+      #  capabilities:
+      #    add:
+      #      - "SYS_ADMIN"
+      #      - "MKNOD"
+      #      - "SYS_CHROOT"
+      #      - "SETFCAP"
+      # resources:
+      #    limits:
+      #      github.com/fuse: 1
+      
+      # extra_resource_limits:
+      #   github.com/fuse: 1
   extraConfig:
     ngshare.py: |
       c.JupyterHub.services.append({
@@ -51,10 +71,16 @@ singleuser:
       - name: jupyterhub-shared
         persistentVolumeClaim:
           claimName: my-pvc
+      # - name: dcache-ro
+      #   persistentVolumeClaim:
+      #     claimName: data-rclone-example
     extraVolumeMounts:
       - name: jupyterhub-shared
         mountPath: /home/shared
+      # - name: dcache-ro
+      #   mountPath: /home/data
   extraFiles:
+    # TODO add /etc/jupyter/nbgrader_config.py here see https://ngshare.readthedocs.io/en/latest/user_guide/install_z2jh.html#installing-ngshare-exchange
     # jupyter_notebook_config reference: https://jupyter-notebook.readthedocs.io/en/stable/config.html
     jupyter_notebook_config.json:
       mountPath: /etc/jupyter/jupyter_notebook_config.json

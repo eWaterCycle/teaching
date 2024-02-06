@@ -12,6 +12,7 @@ Try to run
 ## Boot
 
 ```shell
+winget install Hashicorp.Vagrant --version 2.4.0
 vagrant up
 ```
 
@@ -20,28 +21,29 @@ https://jet.dev/blog/spin-up-local-kubernetes-cluster-agrant/
 ```
 vagrant ssh microk8s_a
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.26.149.178
+172.31.180.222
 vagrant ssh microk8s_b
 ip route | grep default | grep eth0 | cut -d' ' -f9
-172.26.146.78
+172.31.178.224
 
 #a
 sudo -i
-echo "172.26.146.78 microk8s-b" >> /etc/hosts
+echo "172.31.178.224 microk8s-b" >> /etc/hosts
 exit
 
 microk8s add-node
 
 #b
-microk8s join 172.26.149.178:25000/ca5b88a8fce3cd45bff6aa8eb435d140/699b0df3a535
+microk8s join 172.31.180.222:25000/ca5b88a8fce3cd45bff6aa8eb435d140/699b0df3a535
 
 #a
 microk8s kubectl get nodes
 
 # Use range inside hyperv default switch
-microk8s enable metallb:172.26.145.83-172.26.145.93
+microk8s enable metallb:172.31.180.200-172.31.180.221
 microk8s enable hostpath-storage
- microk8s enable rbac # As advised at https://z2jh.jupyter.org/en/stable/administrator/security.html#use-role-based-access-control-rbac
+# As advised at https://z2jh.jupyter.org/en/stable/administrator/security.html#use-role-based-access-control-rbac
+microk8s enable rbac 
 ```
 # NFS
 
@@ -77,7 +79,7 @@ metadata:
   name: nfs-csi
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 172.26.149.178
+  server: 172.31.180.222
   share: /srv/nfs
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -166,7 +168,7 @@ microk8s helm repo update
 ```
 
 ```
- cat config.ngshare.yaml
+# cat config.ngshare.yaml
 deployment:
   # Resource limitations for the pod
   resources:
@@ -188,11 +190,21 @@ ngshare:
 pvc:
   # Amount of storage to allocate
   storage: 1Gi
-  ```
+```
 
 ```
 microk8s helm install ngshare ngshare/ngshare  --namespace teach -f  config.ngshare.yaml
 ```
+
+In Jupyter terminal as admin:
+
+```
+ngshare-course-management create_course hydrology101 sverhoeven
+echo "c.CourseDirectory.course_id = 'hydrology101'" > nbgrader_config.py
+# restart server
+```
+
+Gives permission denied error. Maybe token or admins are wrong.
 
 ## Container in container
 
@@ -246,6 +258,42 @@ model = BmiClientApptainer('docker://ghcr.io/ewatercycle/leakybucket-grpc4bmi:v0
 model.get_component_name()
 del model
 ```
+
+### Try to run apptainer container inside a pod without Jupyter distractions.
+
+```
+microk8s kubectl apply -f apptainer.yaml
+microk8s kubectl describe pod apptainer
+microk8s kubectl get pods apptainer
+microk8s kubectl logs apptainer
+microk8s kubectl exec -it apptainer -- apptainer run docker://alpine:latest cat /etc/os-release
+# should output alpine os release
+microk8s kubectl delete pod apptainer
+```
+
+# dcache / rclone
+
+Mount on a machine.
+
+```
+./rclone-v1.65.2-linux-amd64/rclone mount my-dcache:/ /home/vagrant/rr/data --config ./c --read-only
+```
+This works
+
+Try https://github.com/wunderio/csi-rclone
+
+```
+# on a
+git clone https://github.com/wunderio/csi-rclone.git
+cd csi-rclone
+microk8s kubectl apply -f deploy/kubernetes/1.19
+microk8s kubectl apply -f < rclone.yaml
+```
+
+did not work
+
+try https://github.com/simplyzee/kube-rclone next
+
 
 # TODO
 

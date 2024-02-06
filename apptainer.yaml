@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apptainer
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsNonRoot: true
+  restartPolicy: Never
+  containers:
+  - name: apptainercontainer
+    image: ghcr.io/ewatercycle/teaching:latest
+    # command: 
+    #   - apptainer
+    #   - run
+    #   - docker://alpine:latest cat /etc/os-release
+    securityContext:
+      allowPrivilegeEscalation: true
+      privileged: true
+    resources:
+      limits:
+        cpu: "1"
+        memory: "4Gi"
