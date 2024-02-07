@@ -48,6 +48,7 @@ Use [Zero to JupyterHub with Kubernetes](https://z2jh.jupyter.org) to JupyterHub
 
 Pros:
 - k8s does most babysitting
+- students jupyter server is running isolated container
 
 Cons:
 - need a k8s cluster
