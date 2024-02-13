@@ -38,6 +38,7 @@ https://github.com/sagemathinc/cocalc
 
 * https://github.com/DigiKlausur/e2xhub - A JupyterHub extension for simplifying course management for teaching and exams
 * https://github.com/DigiKlausur/e2xgrader - e2xgrader is an add-on for nbgrader that adds functionality for teachers and students. e2xgrader introduces new cell types and tools for graders (per question grading view, authoring component, pen-based grading) and students (assignment toolbar, exam toolbar, restricted notebook extension).
+  * notebook extension, not a lab extension
 
 
 # Brightspace
