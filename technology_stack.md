@@ -11,6 +11,14 @@ Below is a list of possible stuff for teaching:
 
 https://nbgrader.readthedocs.io/
 
+nbgrader with R:
+- https://github.com/ttimbers/jupyter-nbgrader-r
+- https://doc.cocalc.com/howto/nbgrader.html#nbgrader-for-r
+
+# otter-grader
+
+https:/otter-grader.readthedocs.io/
+
 # OK
 
 Server: Hosted Web Application to store submissions
@@ -48,9 +56,21 @@ https://github.com/IllumiDesk/illumidesk
 
 https://www.codegrade.com/
 
-## 
+Looks good (nice lms integration), however seems to be more focussed on students running code on their own machines. The testing environment is apparently fully configurable, but there doesn't seem to be a clear way to have users work in a notebook that is hosted remotely.
+
+## Vocareum
 
 https://www.vocareum.com/
+
+Already available at TU Delft, but apparently not enough compute available https://www.tudelft.nl/teaching-support/educational-tools/vocareum
+
+# cocalc
+
+CoCalc is a virtual online workspace for calculations, research, collaboration and authoring documents. Your web browser is all you need to escape the confined space of your desktop and move to the cloud. This guide explains the features of CoCalc in depth and shows how you can use them productively.
+
+https://cocalc.com/
+
+Their code is open source, but does not have clear setup instructions. Best to [pay them](https://cocalc.com/pricing/onprem) for running it ourselves.
 
 # Nbgrader extensions
 
@@ -61,3 +81,13 @@ https://github.com/LibreTexts/ngshare - nbgrader sharing service
 * https://github.com/jupyterhub/hubshare - A directory sharing service for JupyterHub
 * https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/174 - nbgrader support in JupyterHub on Kubernetes
 
+# GitHub Classroom
+
+https://docs.github.com/en/education/manage-coursework-with-github-classroom/get-started-with-github-classroom
+
+- can link with LMS google classroom, canvas, moodle, sakai
+
+# abc-classroom
+
+The abc-classroom package is designed for course instructors who are using GitHub Classroom to distribute and collect assignments to and from students.
+https://abc-classroom.readthedocs.io/
