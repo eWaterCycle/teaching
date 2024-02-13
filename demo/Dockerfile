@@ -8,7 +8,7 @@ RUN apt-get update \
 
 # cache some of the bigger installs
 RUN apt-get -y install python3-pip npm
-RUN python3 -m pip install --upgrade jupyterhub
+RUN python3 -m pip install --upgrade pip jupyterhub
 
 # Install nodejs v16 (not available yet on apt).
 ENV NVM_DIR=/root/.nvm

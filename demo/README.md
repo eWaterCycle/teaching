@@ -42,6 +42,18 @@ Login with
 * instructor1: instructor1
 * student1: student1
 
+To edit assignemt
+1. As instructor1
+1. Goto Nbgrader -> Courses -> select course101
+1. Authorize yourself
+1. You can now edit the ps1 assigment in Formgrader
+
+To fetch assigment
+
+1. As student1
+1. Goto Nbgrader -> Assignment list
+1. Fetch ps1
+
 # TODO
 
 * [x] JupyterHub
