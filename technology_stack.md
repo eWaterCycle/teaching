@@ -38,6 +38,7 @@ https://okpy.org/
 * https://docs.valence.desire2learn.com/reference.html - API docs
 * https://github.com/Brightspace/valence-sdk-python - Python Client
 * https://www.imsglobal.org/spec/lti/v1p3 - Learning Tools Interoperability
+* https://community.d2l.com/brightspace/kb/articles/1134-brightspace-api-authentication-guide-oauth-2-0 - For authentication & authorization
 
 # Commercial
 
