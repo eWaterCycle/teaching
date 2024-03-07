@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-rclone-example
+  labels:
+    name: data-rclone-example
+spec:
+  accessModes:
+  - ReadOnlyMany
+  storageClassName: rclone
+  capacity:
+    storage: 10Gi
+  csi:
+    driver: csi-rclone
+    volumeHandle: data-id
+    volumeAttributes:
+      remote: "my-dcache"
+      remotePath: "/"
+      # TODO pass --read-only and --cache-dir
+      configData: |
+        [my-dcache]
+        type = webdav
+        url = https://webdav.grid.surfsara.nl:2880
+        vendor = other
+        user =
+        pass = 
+        bearer_token = ....
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-rclone-example
+spec:
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: rclone
+  selector:
+    matchLabels:
+      name: data-rclone-example
+
+# From ewc infra
+# # /usr/bin/rclone mount \
+#             --config=/etc/rclone.conf \
+#             --allow-other \
+#             --read-only \
+#             --cache-dir {{ rclone_cache_dir }} \
+#             --vfs-cache-max-size {{ rclone_max_gsize }}G\
+#             --vfs-cache-mode full \
+#             {{ dcache_rclone_name }}:{{ dcache_root }} {{ data_root }}
+
+# From jupyter server log
+ # rclone mount 
+#  my-dcache:/ 
+#  /var/snap/microk8s/common/var/lib/kubelet/pods/81d7b6af-b58d-4eef-87f3-e97a0afec474/volumes/kubernetes.io~csi/data-rclone-example/mount 
+#  --daemon 
+#  --config /tmp/rclone.conf3139822866 
+#  --dir-cache-time=5s --vfs-cache-mode=writes 
+#  --allow-non-empty=true --allow-other=true 
+#  --cache-info-age=72h --cache-chunk-clean-interval=15m
+
+#   Warning  FailedMount             21s   kubelet                  
+# MountVolume.SetUp failed for volume "data-rclone-example" : rpc error: code = Internal desc = mounting failed: exit status 1 cmd:
+# 'rclone' remote: 'my-dcache:/' targetpath: /var/snap/microk8s/common/var/lib/kubelet/pods/ae09680d-d77b-462a-8146-61d817ac3451/volumes/kubernetes.io~csi/data-rclone-example/mount 
+# output: "2024/02/06 14:36:37 Fatal error: mount not ready\n"

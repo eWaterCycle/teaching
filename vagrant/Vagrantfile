@@ -1,0 +1,30 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu2204"
+  config.vm.provider "hyperv"
+  # config.vm.box_version = "4.3.10"
+  config.vm.network "public_network", use_dhcp_assigned_default_route: true
+    config.vm.provider "hyperv" do |h|
+      h.maxmemory = 8096
+      h.cpus = 4
+      h.enable_virtualization_extensions = true
+      h.linked_clone = true
+    end
+  config.vm.provision "shell", inline: <<-EOF
+    apt reinstall -y snapd
+    snap install microk8s --classic --stable
+    microk8s status --wait-ready
+    usermod -a -G microk8s vagrant
+  EOF
+  config.vm.define "microk8s_a" do |microk8s_a|
+    microk8s_a.vm.hostname = "microk8s-a"
+    microk8s_a.vm.provider "virtualbox" do |vb|
+      vb.name = "microk8s-a"
+    end
+  end
+  config.vm.define "microk8s_b" do |microk8s_b|
+    microk8s_b.vm.hostname = "microk8s-b"
+    microk8s_b.vm.provider "virtualbox" do |vb|
+      vb.name = "microk8s-b"
+    end
+  end
+end
