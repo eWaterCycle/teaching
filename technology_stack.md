@@ -27,10 +27,18 @@ Autograding: Secure grading of student code.
 
 https://okpy.org/
 
+# cocalc
+
+CoCalc is a virtual online workspace for calculations, research, collaboration and authoring documents. Your web browser is all you need to escape the confined space of your desktop and move to the cloud. This guide explains the features of CoCalc in depth and shows how you can use them productively.
+
+https://cocalc.com/
+https://github.com/sagemathinc/cocalc
+
 # e2x
 
 * https://github.com/DigiKlausur/e2xhub - A JupyterHub extension for simplifying course management for teaching and exams
 * https://github.com/DigiKlausur/e2xgrader - e2xgrader is an add-on for nbgrader that adds functionality for teachers and students. e2xgrader introduces new cell types and tools for graders (per question grading view, authoring component, pen-based grading) and students (assignment toolbar, exam toolbar, restricted notebook extension).
+  * notebook extension, not a lab extension
 
 
 # Brightspace
@@ -75,3 +83,13 @@ https://github.com/LibreTexts/ngshare - nbgrader sharing service
 * https://github.com/jupyterhub/hubshare - A directory sharing service for JupyterHub
 * https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/174 - nbgrader support in JupyterHub on Kubernetes
 
+# GitHub Classroom
+
+https://docs.github.com/en/education/manage-coursework-with-github-classroom/get-started-with-github-classroom
+
+- can link with LMS google classroom, canvas, moodle, sakai
+
+# abc-classroom
+
+The abc-classroom package is designed for course instructors who are using GitHub Classroom to distribute and collect assignments to and from students.
+https://abc-classroom.readthedocs.io/
